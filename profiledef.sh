@@ -7,7 +7,7 @@ iso_publisher="Arch Linux <https://archlinux.org>"
 iso_application="Arch Linux baseline"
 iso_version="$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)"
 install_dir="arch"
-bootmodes=('uefi-systemd-boot')
+bootmodes=('uefi-x64.systemd-boot')
 pacman_conf="pacman.conf"
 airootfs_image_type="erofs"
 airootfs_image_tool_options=('-zlzma,109' -E 'ztailpacking')
