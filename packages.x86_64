@@ -7,7 +7,6 @@ linux-firmware-whence
 mkinitcpio
 mkinitcpio-archiso
 systemd-boot
-syslinux
 intel-ucode
 vulkan-intel
 vulkan-icd-loader
