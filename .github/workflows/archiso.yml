@@ -1,0 +1,36 @@
+name: Build Custom Arch ISO
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
+      options: --privileged
+    steps:
+
+      - name: Init Keys
+        run: |
+          pacman-key --init
+          pacman-key --populate archlinux
+          pacman -Syyu --noconfirm
+
+      - name: Install dependencies
+        run: pacman -S --noconfirm archiso git
+
+      - name: Build ArchISO
+        run: |
+          git clone https://github.com/0xyousif/archlive.git
+          mkarchiso -v -w /tmp/work -o /output ./archlive
+
+      - name: Fix permissions
+        if: always()
+        run: chmod -R 777 /output
+
+      - name: Upload ISO Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: custom-arch-iso
+          path: /output/*.iso
